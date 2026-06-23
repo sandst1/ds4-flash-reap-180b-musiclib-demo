@@ -69,7 +69,7 @@
 - [X] **T19 — Artists API tests**  
   `server/routes/artists.test.js` — build Express app with the artists router + error handler against `:memory:` DB. Test: GET empty list, POST create (valid + missing name 400), GET by id (found + 404), PUT update (valid + 404 + empty name 400), DELETE (204 + 404 + cascading deletes albums/songs), GET nested `/artists/:id/albums` (empty + returns albums).
 
-- [ ] **T20 — Albums API tests**  
+- [x] **T20 — Albums API tests**  
   `server/routes/albums.test.js` — test: GET list (empty + filtered by `?artist_id`), POST create (valid + missing title/artist_id 400 + nonexistent artist 400), GET by id (includes `artist_name` join + 404), PUT update (valid + 404 + empty title 400 + invalid artist_id 400), DELETE (204 + 404 + cascading deletes songs), GET nested `/albums/:id/songs`.
 
 - [ ] **T21 — Songs & Playlists API tests**  
