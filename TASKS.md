@@ -8,7 +8,7 @@
 - [x] **T2 — Dev tooling setup**  
   Install `eslint` + config, set up `npm run lint`, `npm run typecheck`, `npm run test` scripts in root `package.json`. Add `node --test` (Node built-in test runner) for server unit tests. Commands should produce compact output (summary only on pass, verbose on failure). Configure eslint for both `server/` and `client/`.
 
-- [ ] **T3 — Database schema & init**  
+- [x] **T3 — Database schema & init**  
   Create `server/db/schema.sql` with the 5 tables (artists, albums, songs, playlists, playlist_songs). Create `server/db/index.js` to initialize SQLite DB on disk, run schema if fresh. Add seed script.
 
 ## Phase 2: Backend API
