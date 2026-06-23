@@ -76,7 +76,7 @@
   `server/routes/songs.test.js` — test: GET list (empty + filtered by `?album_id`), POST create (valid + missing fields 400 + nonexistent album 400), GET by id, PUT update, DELETE, 404 cases.  
   `server/routes/playlists.test.js` — test: GET list, POST create (valid + missing name 400), GET by id (includes `songs` array), PUT update, DELETE, 404 cases.
 
-- [ ] **T22 — Playlist Songs, Stats & Error handler tests**  
+- [x] **T22 — Playlist Songs, Stats & Error handler tests**  
   `server/routes/playlistSongs.test.js` — test: GET songs ordered, POST add (auto-assigns position + duplicate song OK + missing song_id 400 + nonexistent playlist/song 404), DELETE remove (204 + 404), PUT reorder (updates positions + empty song_ids 400).  
   `server/routes/stats.test.js` — test: counts reflect seeded data.  
   `server/middleware/errorHandler.test.js` — test: returns `{ error, status }` JSON with correct status code.
