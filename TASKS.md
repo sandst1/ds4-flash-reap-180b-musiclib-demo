@@ -66,7 +66,7 @@
 - [X] **T18 — Database layer tests**  
   `server/db/index.test.js` — `getDb()` returns same instance on repeated calls, creates tables (verify with `SELECT name FROM sqlite_master`), `seedDb()` inserts seed data. Use `:memory:` path via `DB_PATH` env var.
 
-- [ ] **T19 — Artists API tests**  
+- [X] **T19 — Artists API tests**  
   `server/routes/artists.test.js` — build Express app with the artists router + error handler against `:memory:` DB. Test: GET empty list, POST create (valid + missing name 400), GET by id (found + 404), PUT update (valid + 404 + empty name 400), DELETE (204 + 404 + cascading deletes albums/songs), GET nested `/artists/:id/albums` (empty + returns albums).
 
 - [ ] **T20 — Albums API tests**  
