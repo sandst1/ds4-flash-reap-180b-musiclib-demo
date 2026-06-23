@@ -5,7 +5,7 @@
 | Layer | Choice |
 |---|---|
 | **Backend** | Node.js + Express.js |
-| **Database** | SQLite via `better-sqlite3` |
+| **Database** | SQLite via built-in `node:sqlite` (Node ≥22) |
 | **Frontend** | React 18+ with Vite |
 | **Routing (client)** | React Router v6 |
 | **HTTP client** | Native `fetch` (no Axios) |

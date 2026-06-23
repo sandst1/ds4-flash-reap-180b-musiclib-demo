@@ -18,7 +18,7 @@ This is a single-user music library web application for managing artists, albums
 
 - **Backend**: Express routes in `server/routes/*.js`, each exporting a `Router`. DB access via `server/db/index.js`.
 - **Frontend**: React pages in `client/src/pages/*.jsx`, shared components in `client/src/components/*.jsx`. API calls through `client/src/api/client.js`.
-- **Database**: `better-sqlite3` synchronous API. Schema in `server/db/schema.sql`.
+- **Database**: `node:sqlite` (built-in, Node ≥22). Thin wrapper `server/db/sqlite.js` provides better-sqlite3-compatible API. Schema in `server/db/schema.sql`.
 - **No authentication** — single-user app.
 - **Error responses**: Always return `{ error, status }` JSON.
 

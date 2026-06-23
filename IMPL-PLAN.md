@@ -44,7 +44,7 @@ The implementation follows a strict dependency order — each layer depends on t
 ## Key Decisions
 
 - **Single-user, no auth** — local app assumption
-- **SQLite with better-sqlite3** — synchronous, simple, no ORM
+- **SQLite with built-in `node:sqlite`** — synchronous (via thin wrapper), simple, no ORM
 - **npm workspaces** — server and client share root
 - **Native `fetch`** — no Axios/http client library
 - **React Router v6** — standard SPA routing

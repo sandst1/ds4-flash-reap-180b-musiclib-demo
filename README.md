@@ -7,7 +7,7 @@ A single-user web application for managing a music catalog — artists, albums, 
 | Layer | Choice |
 |---|---|
 | **Backend** | Node.js + Express.js |
-| **Database** | SQLite via `better-sqlite3` |
+| **Database** | SQLite via built-in `node:sqlite` (Node ≥22) |
 | **Frontend** | React 18+ with Vite |
 | **Routing** | React Router v6 |
 | **HTTP** | Native `fetch` |
