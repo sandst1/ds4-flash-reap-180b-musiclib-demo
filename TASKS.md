@@ -45,7 +45,7 @@
 - [x] **T13 — Songs UI page**  
   `SongsList.jsx` — browsable table of all songs across albums. Create/edit forms.
 
-- [ ] **T14 — Playlists UI pages**  
+- [x] **T14 — Playlists UI pages**  
   `PlaylistsList.jsx` — list of playlists. `PlaylistDetail.jsx` — playlist info + song list with add/remove/reorder (drag-to-reorder or move up/down buttons).
 
 - [ ] **T15 — Navigation & polish**  
