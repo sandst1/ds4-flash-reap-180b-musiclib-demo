@@ -33,7 +33,7 @@
 
 ## Phase 3: Frontend
 
-- [ ] **T10 — React app scaffold**  
+- [x] **T10 — React app scaffold**  
   Initialize Vite React project in `client/`. Set up React Router, create `client/src/api/client.js` with fetch wrappers for all endpoints. Configure Vite proxy to `localhost:3001` for `/api`.
 
 - [ ] **T11 — Artists UI pages**  

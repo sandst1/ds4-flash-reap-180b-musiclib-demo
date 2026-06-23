@@ -4,7 +4,7 @@ import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 
 export default [
-  { ignores: ["**/*.sql", "dist/**", "node_modules/**", "*.db"] },
+  { ignores: ["**/*.sql", "**/dist/**", "node_modules/**", "*.db"] },
 
   { settings: { react: { version: "detect" } } },
 
@@ -32,7 +32,7 @@ export default [
   },
 
   {
-    files: ["client/**/*.jsx"],
+    files: ["client/**/*.jsx", "client/**/*.js"],
     languageOptions: {
       globals: { ...globals.browser },
     },
