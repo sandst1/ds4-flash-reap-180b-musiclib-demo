@@ -86,7 +86,7 @@
 - [x] **T23 — API client unit tests**  
   `client/src/api/client.test.js` — mock `global.fetch` per test. Verify each exported function calls the correct URL, method, and body JSON. Test 204 returns `null`. Test non-ok responses throw `Error` with server error message.
 
-- [ ] **T24 — Shared component tests**  
+- [x] **T24 — Shared component tests**  
   `client/src/components/Layout.test.jsx` — renders NavBar + children.  
   `client/src/components/NavBar.test.jsx` — renders links (Dashboard, Artists, Songs, Playlists), highlights active link based on current pathname. Use `MemoryRouter` wrapper.
 
