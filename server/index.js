@@ -26,10 +26,12 @@ import { router as artistsRouter } from './routes/artists.js';
 import { router as albumsRouter } from './routes/albums.js';
 import { router as songsRouter } from './routes/songs.js';
 import { router as playlistsRouter } from './routes/playlists.js';
+import { router as playlistSongsRouter } from './routes/playlistSongs.js';
 app.use('/api/artists', artistsRouter);
 app.use('/api/albums', albumsRouter);
 app.use('/api/songs', songsRouter);
 app.use('/api/playlists', playlistsRouter);
+app.use('/api/playlists', playlistSongsRouter);
 
 // Error handler (must be last)
 app.use(errorHandler);

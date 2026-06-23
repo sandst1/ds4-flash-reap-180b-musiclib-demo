@@ -28,7 +28,7 @@
 - [x] **T8 — Playlists CRUD API**  
   Routes in `server/routes/playlists.js`: GET list, POST, GET by id (includes joined songs), PUT, DELETE.
 
-- [ ] **T9 — Playlist Songs API**  
+- [x] **T9 — Playlist Songs API**  
   Routes in `server/routes/playlistSongs.js`: GET songs in playlist (ordered), POST add song, DELETE remove song, PUT reorder (accepts `{ song_ids: [...] }` to set new order).
 
 ## Phase 3: Frontend
