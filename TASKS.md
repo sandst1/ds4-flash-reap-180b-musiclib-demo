@@ -53,5 +53,5 @@
 
 ## Phase 4: Verify
 
-- [ ] **T16 — Smoke test**  
+- [X] **T16 — Smoke test**  
   Start full app, exercise the full workflow: create artist → album → songs → playlist → add/reorder songs → edit/delete everything.
