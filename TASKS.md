@@ -36,7 +36,7 @@
 - [x] **T10 — React app scaffold**  
   Initialize Vite React project in `client/`. Set up React Router, create `client/src/api/client.js` with fetch wrappers for all endpoints. Configure Vite proxy to `localhost:3001` for `/api`.
 
-- [ ] **T11 — Artists UI pages**  
+- [x] **T11 — Artists UI pages**  
   `ArtistsList.jsx` — grid/table of all artists with create button. `ArtistDetail.jsx` — artist info + albums list. Forms for create/edit.
 
 - [ ] **T12 — Albums UI page**  

@@ -1,7 +1,19 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { ArtistsList } from './pages/ArtistsList.jsx';
+import { ArtistDetail } from './pages/ArtistDetail.jsx';
 
 function Home() {
-  return <h2>Welcome to Music Library</h2>;
+  return (
+    <div>
+      <h1>Music Library</h1>
+      <ul>
+        <li><Link to="/artists">Artists</Link></li>
+        <li><Link to="/albums">Albums</Link></li>
+        <li><Link to="/songs">Songs</Link></li>
+        <li><Link to="/playlists">Playlists</Link></li>
+      </ul>
+    </div>
+  );
 }
 
 function App() {
@@ -12,6 +24,8 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/artists" element={<ArtistsList />} />
+        <Route path="/artists/:id" element={<ArtistDetail />} />
       </Routes>
     </BrowserRouter>
   );

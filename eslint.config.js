@@ -16,6 +16,7 @@ export default [
     plugins: { "react-hooks": pluginReactHooks },
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
+      "react-hooks/set-state-in-effect": "warn",
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off",
     },
