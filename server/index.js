@@ -25,9 +25,11 @@ app.use(express.static(resolve('client', 'dist')));
 import { router as artistsRouter } from './routes/artists.js';
 import { router as albumsRouter } from './routes/albums.js';
 import { router as songsRouter } from './routes/songs.js';
+import { router as playlistsRouter } from './routes/playlists.js';
 app.use('/api/artists', artistsRouter);
 app.use('/api/albums', albumsRouter);
 app.use('/api/songs', songsRouter);
+app.use('/api/playlists', playlistsRouter);
 
 // Error handler (must be last)
 app.use(errorHandler);

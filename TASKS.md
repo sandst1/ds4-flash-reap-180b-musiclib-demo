@@ -25,7 +25,7 @@
 - [x] **T7 — Songs CRUD API**  
   Routes in `server/routes/songs.js`: GET list (optional `?album_id`), POST, GET by id, PUT, DELETE. GET `/api/albums/:id/songs`.
 
-- [ ] **T8 — Playlists CRUD API**  
+- [x] **T8 — Playlists CRUD API**  
   Routes in `server/routes/playlists.js`: GET list, POST, GET by id (includes joined songs), PUT, DELETE.
 
 - [ ] **T9 — Playlist Songs API**  
