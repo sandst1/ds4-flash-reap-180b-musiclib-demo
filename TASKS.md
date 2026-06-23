@@ -42,7 +42,7 @@
 - [x] **T12 — Albums UI page**  
   `AlbumDetail.jsx` — album info + songs list. Create/edit forms (inline in artist detail page).
 
-- [ ] **T13 — Songs UI page**  
+- [x] **T13 — Songs UI page**  
   `SongsList.jsx` — browsable table of all songs across albums. Create/edit forms.
 
 - [ ] **T14 — Playlists UI pages**  

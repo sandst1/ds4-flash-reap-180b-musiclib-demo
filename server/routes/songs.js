@@ -7,12 +7,16 @@ const router = Router();
 router.get('/', (req, res) => {
   const db = getDb();
   let songs;
+  const select = `SELECT songs.*, albums.title AS album_title
+    FROM songs JOIN albums ON songs.album_id = albums.id`;
   if (req.query.album_id) {
     songs = db.prepare(
-      'SELECT * FROM songs WHERE album_id = ? ORDER BY track_num'
+      `${select} WHERE songs.album_id = ? ORDER BY songs.track_num`
     ).all(req.query.album_id);
   } else {
-    songs = db.prepare('SELECT * FROM songs ORDER BY album_id, track_num').all();
+    songs = db.prepare(
+      `${select} ORDER BY songs.album_id, songs.track_num`
+    ).all();
   }
   res.json(songs);
 });
