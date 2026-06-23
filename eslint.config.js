@@ -41,4 +41,11 @@ export default [
       "react/prop-types": "off",
     },
   },
+
+  {
+    files: ["client/**/*.test.jsx", "client/**/*.test.js"],
+    languageOptions: {
+      globals: { vi: "readonly", global: "readonly" },
+    },
+  },
 ];

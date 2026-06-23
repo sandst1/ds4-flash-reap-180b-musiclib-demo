@@ -90,5 +90,5 @@
   `client/src/components/Layout.test.jsx` — renders NavBar + children.  
   `client/src/components/NavBar.test.jsx` — renders links (Dashboard, Artists, Songs, Playlists), highlights active link based on current pathname. Use `MemoryRouter` wrapper.
 
-- [ ] **T25 — Page component tests**  
+- [x] **T25 — Page component tests**  
   `client/src/pages/*.test.jsx` — each page tested for: **loading** state (shows loading text), **error** state (shows error message in red), **empty** state (shows empty message), **populated** state (renders table/list with correct data). Mock API client functions via `vi.mock()`. Use `MemoryRouter` wrapper for pages that use `<Link>` or `useParams`. For detail pages, verify fetch is called with the correct `id` param. For PlaylistDetail, test move-up/move-down reorder interaction.
