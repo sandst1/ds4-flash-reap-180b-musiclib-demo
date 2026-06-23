@@ -58,12 +58,12 @@
 
 ## Phase 5: Testing — Setup
 
-- [ ] **T17 — Install vitest & test dependencies**  
+- [X] **T17 — Install vitest & test dependencies**  
   Install `vitest` in `server/` and `client/`. Add `@vitejs/plugin-react` for client (already present), `jsdom`, `@testing-library/react`, `@testing-library/jest-dom` to client devDeps. Add `supertest` to server devDeps. Create `vitest.config.js` for each workspace (server: no env / node; client: `jsdom` env, `setupFiles` for `@testing-library/jest-dom`). Update root `scripts.test` and `server/package.json` test script to use `vitest run`. Add `client/src/test-setup.js` for library imports.
 
 ## Phase 6: Testing — Backend (vitest + supertest)
 
-- [ ] **T18 — Database layer tests**  
+- [X] **T18 — Database layer tests**  
   `server/db/index.test.js` — `getDb()` returns same instance on repeated calls, creates tables (verify with `SELECT name FROM sqlite_master`), `seedDb()` inserts seed data. Use `:memory:` path via `DB_PATH` env var.
 
 - [ ] **T19 — Artists API tests**  
