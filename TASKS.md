@@ -39,7 +39,7 @@
 - [x] **T11 — Artists UI pages**  
   `ArtistsList.jsx` — grid/table of all artists with create button. `ArtistDetail.jsx` — artist info + albums list. Forms for create/edit.
 
-- [ ] **T12 — Albums UI page**  
+- [x] **T12 — Albums UI page**  
   `AlbumDetail.jsx` — album info + songs list. Create/edit forms (inline in artist detail page).
 
 - [ ] **T13 — Songs UI page**  
