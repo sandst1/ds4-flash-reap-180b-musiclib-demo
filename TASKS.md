@@ -72,7 +72,7 @@
 - [x] **T20 — Albums API tests**  
   `server/routes/albums.test.js` — test: GET list (empty + filtered by `?artist_id`), POST create (valid + missing title/artist_id 400 + nonexistent artist 400), GET by id (includes `artist_name` join + 404), PUT update (valid + 404 + empty title 400 + invalid artist_id 400), DELETE (204 + 404 + cascading deletes songs), GET nested `/albums/:id/songs`.
 
-- [ ] **T21 — Songs & Playlists API tests**  
+- [x] **T21 — Songs & Playlists API tests**  
   `server/routes/songs.test.js` — test: GET list (empty + filtered by `?album_id`), POST create (valid + missing fields 400 + nonexistent album 400), GET by id, PUT update, DELETE, 404 cases.  
   `server/routes/playlists.test.js` — test: GET list, POST create (valid + missing name 400), GET by id (includes `songs` array), PUT update, DELETE, 404 cases.
 
