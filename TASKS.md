@@ -83,7 +83,7 @@
 
 ## Phase 7: Testing — Frontend (vitest + jsdom + testing-library)
 
-- [ ] **T23 — API client unit tests**  
+- [x] **T23 — API client unit tests**  
   `client/src/api/client.test.js` — mock `global.fetch` per test. Verify each exported function calls the correct URL, method, and body JSON. Test 204 returns `null`. Test non-ok responses throw `Error` with server error message.
 
 - [ ] **T24 — Shared component tests**  
