@@ -75,6 +75,19 @@ router.put('/:id', (req, res) => {
   res.json(album);
 });
 
+// GET /api/albums/:id/songs — get songs by album
+router.get('/:id/songs', (req, res) => {
+  const db = getDb();
+  const album = db.prepare('SELECT id FROM albums WHERE id = ?').get(req.params.id);
+  if (!album) {
+    return res.status(404).json({ error: 'Album not found', status: 404 });
+  }
+  const songs = db.prepare(
+    'SELECT * FROM songs WHERE album_id = ? ORDER BY track_num'
+  ).all(req.params.id);
+  res.json(songs);
+});
+
 // DELETE /api/albums/:id — delete album (cascades to songs)
 router.delete('/:id', (req, res) => {
   const db = getDb();
