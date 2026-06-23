@@ -27,6 +27,8 @@ import { router as albumsRouter } from './routes/albums.js';
 import { router as songsRouter } from './routes/songs.js';
 import { router as playlistsRouter } from './routes/playlists.js';
 import { router as playlistSongsRouter } from './routes/playlistSongs.js';
+import { router as statsRouter } from './routes/stats.js';
+app.use('/api/stats', statsRouter);
 app.use('/api/artists', artistsRouter);
 app.use('/api/albums', albumsRouter);
 app.use('/api/songs', songsRouter);

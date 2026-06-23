@@ -68,7 +68,7 @@ function AlbumDetail() {
 
   return (
     <div>
-      <Link to={`/artists/${album.artist_id}`}>← Back to Artist</Link>
+      <Link to={`/artists/${album.artist_id}`} className="back-link">← Back to <strong>{album.artist_name}</strong></Link>
 
       {editing ? (
         <form onSubmit={handleUpdate}>

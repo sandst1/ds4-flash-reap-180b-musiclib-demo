@@ -48,7 +48,7 @@
 - [x] **T14 — Playlists UI pages**  
   `PlaylistsList.jsx` — list of playlists. `PlaylistDetail.jsx` — playlist info + song list with add/remove/reorder (drag-to-reorder or move up/down buttons).
 
-- [ ] **T15 — Navigation & polish**  
+- [x] **T15 — Navigation & polish**  
   `Layout.jsx` / `NavBar.jsx` — app shell with nav links. Dashboard page `/` with summary counts. Consistent styling. Linking between entities (click artist → albums, click album → songs, etc.).
 
 ## Phase 4: Verify

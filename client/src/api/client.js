@@ -84,6 +84,11 @@ export function deleteSong(id) {
   return request(`/songs/${id}`, { method: 'DELETE' });
 }
 
+// Stats
+export function getStats() {
+  return request('/stats');
+}
+
 // Playlists
 export function getPlaylists() {
   return request('/playlists');

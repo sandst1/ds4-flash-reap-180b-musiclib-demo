@@ -37,5 +37,8 @@ export default [
     languageOptions: {
       globals: { ...globals.browser },
     },
+    rules: {
+      "react/prop-types": "off",
+    },
   },
 ];

@@ -38,7 +38,9 @@ router.post('/', (req, res) => {
 // GET /api/albums/:id — get album by ID
 router.get('/:id', (req, res) => {
   const db = getDb();
-  const album = db.prepare('SELECT * FROM albums WHERE id = ?').get(req.params.id);
+  const album = db.prepare(
+    'SELECT albums.*, artists.name AS artist_name FROM albums JOIN artists ON albums.artist_id = artists.id WHERE albums.id = ?'
+  ).get(req.params.id);
   if (!album) {
     return res.status(404).json({ error: 'Album not found', status: 404 });
   }
