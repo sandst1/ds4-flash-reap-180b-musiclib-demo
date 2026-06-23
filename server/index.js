@@ -23,7 +23,9 @@ app.use(express.static(resolve('client', 'dist')));
 
 // API routes
 import { router as artistsRouter } from './routes/artists.js';
+import { router as albumsRouter } from './routes/albums.js';
 app.use('/api/artists', artistsRouter);
+app.use('/api/albums', albumsRouter);
 
 // Error handler (must be last)
 app.use(errorHandler);
