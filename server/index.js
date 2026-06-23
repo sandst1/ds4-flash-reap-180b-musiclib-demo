@@ -1,7 +1,7 @@
 import express from 'express';
 import { resolve } from 'node:path';
 import { errorHandler } from './middleware/errorHandler.js';
-import { getDb } from './db/index.js';
+import { getDb, seedDb } from './db/index.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -40,5 +40,6 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   getDb();
+  seedDb(getDb());
   console.log(`Server listening on http://localhost:${PORT}`);
 });

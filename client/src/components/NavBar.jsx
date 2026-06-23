@@ -5,6 +5,7 @@ function NavBar() {
   const links = [
     { to: '/', label: 'Dashboard' },
     { to: '/artists', label: 'Artists' },
+    { to: '/albums', label: 'Albums' },
     { to: '/songs', label: 'Songs' },
     { to: '/playlists', label: 'Playlists' },
   ];

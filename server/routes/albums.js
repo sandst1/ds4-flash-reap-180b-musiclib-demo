@@ -9,10 +9,12 @@ router.get('/', (req, res) => {
   let albums;
   if (req.query.artist_id) {
     albums = db.prepare(
-      'SELECT * FROM albums WHERE artist_id = ? ORDER BY title'
+      'SELECT albums.*, artists.name AS artist_name FROM albums JOIN artists ON albums.artist_id = artists.id WHERE artist_id = ? ORDER BY albums.title'
     ).all(req.query.artist_id);
   } else {
-    albums = db.prepare('SELECT * FROM albums ORDER BY title').all();
+    albums = db.prepare(
+      'SELECT albums.*, artists.name AS artist_name FROM albums JOIN artists ON albums.artist_id = artists.id ORDER BY albums.title'
+    ).all();
   }
   res.json(albums);
 });

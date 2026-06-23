@@ -20,7 +20,7 @@ function Dashboard() {
 
   const cards = [
     { label: 'Artists', count: stats.artists, to: '/artists' },
-    { label: 'Albums', count: stats.albums, to: '/artists' },
+    { label: 'Albums', count: stats.albums, to: '/albums' },
     { label: 'Songs', count: stats.songs, to: '/songs' },
     { label: 'Playlists', count: stats.playlists, to: '/playlists' },
   ];

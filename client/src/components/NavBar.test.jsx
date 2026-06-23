@@ -21,6 +21,7 @@ describe('NavBar', () => {
     renderAt('/');
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Artists')).toBeInTheDocument();
+    expect(screen.getByText('Albums')).toBeInTheDocument();
     expect(screen.getByText('Songs')).toBeInTheDocument();
     expect(screen.getByText('Playlists')).toBeInTheDocument();
   });
@@ -34,6 +35,12 @@ describe('NavBar', () => {
   it('highlights Artists link at /artists', () => {
     renderAt('/artists');
     expect(screen.getByText('Artists')).toHaveClass('active');
+    expect(screen.getByText('Dashboard')).not.toHaveClass('active');
+  });
+
+  it('highlights Albums link at /albums', () => {
+    renderAt('/albums');
+    expect(screen.getByText('Albums')).toHaveClass('active');
     expect(screen.getByText('Dashboard')).not.toHaveClass('active');
   });
 

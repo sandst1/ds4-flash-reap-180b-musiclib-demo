@@ -65,7 +65,7 @@ router.get('/:id/albums', (req, res) => {
     return res.status(404).json({ error: 'Artist not found', status: 404 });
   }
   const albums = db.prepare(
-    'SELECT * FROM albums WHERE artist_id = ? ORDER BY title'
+    'SELECT albums.*, artists.name AS artist_name FROM albums JOIN artists ON albums.artist_id = artists.id WHERE artist_id = ? ORDER BY albums.title'
   ).all(req.params.id);
   res.json(albums);
 });
