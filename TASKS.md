@@ -13,7 +13,7 @@
 
 ## Phase 2: Backend API
 
-- [ ] **T4 — Express server skeleton**  
+- [x] **T4 — Express server skeleton**  
   Create `server/index.js` — Express app with CORS, JSON body parsing, static serving for dev, error handler middleware. Start on port 3001.
 
 - [ ] **T5 — Artists CRUD API**  
