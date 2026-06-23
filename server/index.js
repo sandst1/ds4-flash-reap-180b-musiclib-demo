@@ -21,7 +21,9 @@ app.use(express.json());
 // Static serving for built client
 app.use(express.static(resolve('client', 'dist')));
 
-// API routes will be mounted here in later tasks
+// API routes
+import { router as artistsRouter } from './routes/artists.js';
+app.use('/api/artists', artistsRouter);
 
 // Error handler (must be last)
 app.use(errorHandler);
