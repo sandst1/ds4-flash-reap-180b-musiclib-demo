@@ -206,7 +206,7 @@
 
 ## Phase 12: TypeScript — Verification & Polish
 
-- [ ] **T47 — Full typecheck pass**  
+- [x] **T47 — Full typecheck pass**  
   Run `tsc --noEmit` in both workspaces. Fix any remaining type errors: implicit `any`, missing null checks, untyped callback params, `useParams()` return type, etc.
 
 - [ ] **T48 — Full test pass**  
