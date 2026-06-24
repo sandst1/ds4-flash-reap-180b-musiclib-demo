@@ -209,7 +209,7 @@
 - [x] **T47 — Full typecheck pass**  
   Run `tsc --noEmit` in both workspaces. Fix any remaining type errors: implicit `any`, missing null checks, untyped callback params, `useParams()` return type, etc.
 
-- [ ] **T48 — Full test pass**  
+- [x] **T48 — Full test pass**  
   Run `npm run test` — all server and client tests pass on `.ts`/`.tsx` files.
 
 - [ ] **T49 — Full build and smoke test**  
