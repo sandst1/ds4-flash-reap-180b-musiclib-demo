@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
-import { errorHandler } from './errorHandler.js';
+import { errorHandler } from './errorHandler.ts';
 
 function buildApp() {
   const app = express();
   app.use(express.json());
   app.get('/test-error', (req, res, next) => {
-    const err = new Error('Something broke');
+    const err = new Error('Something broke') as Error & { status: number };
     err.status = 418;
     next(err);
   });

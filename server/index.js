@@ -1,6 +1,6 @@
 import express from 'express';
 import { resolve } from 'node:path';
-import { errorHandler } from './middleware/errorHandler.js';
+import { errorHandler } from './middleware/errorHandler.ts';
 import { getDb, seedDb } from './db/index.js';
 
 const app = express();

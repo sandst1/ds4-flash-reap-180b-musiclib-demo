@@ -122,7 +122,7 @@
   Rename `server/db/index.js` → `index.ts`. Type `getDb()` return, `seedDb()` param.  
   Update all imports inside the files and in `tsconfig.json` includes.
 
-- [ ] **T30 — Convert middleware to TS**  
+- [x] **T30 — Convert middleware to TS**  
   Rename `server/middleware/errorHandler.js` → `errorHandler.ts`. Type the Express error-handling signature `(err: Error, req: Request, res: Response, next: NextFunction)`.  
   Rename `server/middleware/errorHandler.test.js` → `errorHandler.test.ts`.
 
