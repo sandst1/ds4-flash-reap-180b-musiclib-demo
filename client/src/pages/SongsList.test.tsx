@@ -11,7 +11,7 @@ vi.mock('../api/client.js', () => ({
 }));
 
 import { getSongs, getAlbums } from '../api/client';
-import { SongsList } from './SongsList.jsx';
+import { SongsList } from './SongsList.tsx';
 
 function renderIt() {
   return render(

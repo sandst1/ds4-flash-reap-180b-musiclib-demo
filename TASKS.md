@@ -172,7 +172,7 @@
   Rename `client/src/pages/ArtistDetail.jsx` → `ArtistDetail.tsx`.  
   Rename their `.test.jsx` → `.test.tsx` counterparts.
 
-- [ ] **T41 — Convert Albums & Songs pages to TS**  
+- [x] **T41 — Convert Albums & Songs pages to TS**  
   Rename `client/src/pages/AlbumsList.jsx` → `AlbumsList.tsx`.  
   Rename `client/src/pages/AlbumDetail.jsx` → `AlbumDetail.tsx`.  
   Rename `client/src/pages/SongsList.jsx` → `SongsList.tsx`.  

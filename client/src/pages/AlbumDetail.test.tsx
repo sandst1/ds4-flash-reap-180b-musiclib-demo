@@ -10,7 +10,7 @@ vi.mock('../api/client.js', () => ({
 }));
 
 import { getAlbum, getAlbumSongs } from '../api/client';
-import { AlbumDetail } from './AlbumDetail.jsx';
+import { AlbumDetail } from './AlbumDetail.tsx';
 
 function renderIt(id = '1') {
   return render(

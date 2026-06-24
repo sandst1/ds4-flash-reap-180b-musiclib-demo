@@ -3,9 +3,9 @@ import { Layout } from './components/Layout.tsx';
 import { Dashboard } from './pages/Dashboard.tsx';
 import { ArtistsList } from './pages/ArtistsList.tsx';
 import { ArtistDetail } from './pages/ArtistDetail.tsx';
-import { AlbumDetail } from './pages/AlbumDetail.jsx';
-import { AlbumsList } from './pages/AlbumsList.jsx';
-import { SongsList } from './pages/SongsList.jsx';
+import { AlbumDetail } from './pages/AlbumDetail.tsx';
+import { AlbumsList } from './pages/AlbumsList.tsx';
+import { SongsList } from './pages/SongsList.tsx';
 import { PlaylistsList } from './pages/PlaylistsList.jsx';
 import { PlaylistDetail } from './pages/PlaylistDetail.jsx';
 
