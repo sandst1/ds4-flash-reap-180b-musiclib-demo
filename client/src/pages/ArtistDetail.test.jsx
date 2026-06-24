@@ -12,7 +12,7 @@ vi.mock('../api/client.js', () => ({
   deleteAlbum: vi.fn(),
 }));
 
-import { getArtist, getArtistAlbums } from '../api/client.js';
+import { getArtist, getArtistAlbums } from '../api/client';
 import { ArtistDetail } from './ArtistDetail.jsx';
 
 function renderIt(id = '1') {

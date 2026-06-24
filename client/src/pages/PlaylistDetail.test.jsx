@@ -12,7 +12,7 @@ vi.mock('../api/client.js', () => ({
   getSongs: vi.fn(),
 }));
 
-import { getPlaylist, getSongs, reorderPlaylistSongs } from '../api/client.js';
+import { getPlaylist, getSongs, reorderPlaylistSongs } from '../api/client';
 import { PlaylistDetail } from './PlaylistDetail.jsx';
 
 function renderIt(id = '1') {

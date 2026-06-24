@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getArtists, createArtist, updateArtist, deleteArtist } from '../api/client.js';
+import { getArtists, createArtist, updateArtist, deleteArtist } from '../api/client';
 
 function ArtistsList() {
   const [artists, setArtists] = useState([]);

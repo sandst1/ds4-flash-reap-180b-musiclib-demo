@@ -4,7 +4,7 @@ import {
   getPlaylist, updatePlaylist, deletePlaylist,
   addSongToPlaylist, removeSongFromPlaylist, reorderPlaylistSongs,
   getSongs,
-} from '../api/client.js';
+} from '../api/client';
 
 function PlaylistDetail() {
   const { id } = useParams();

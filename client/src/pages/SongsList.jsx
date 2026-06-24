@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getSongs, createSong, updateSong, deleteSong, getAlbums } from '../api/client.js';
+import { getSongs, createSong, updateSong, deleteSong, getAlbums } from '../api/client';
 
 function SongsList() {
   const [songs, setSongs] = useState([]);

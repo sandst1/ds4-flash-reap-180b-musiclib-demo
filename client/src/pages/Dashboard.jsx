@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStats } from '../api/client.js';
+import { getStats } from '../api/client';
 
 function Dashboard() {
   const [stats, setStats] = useState(null);

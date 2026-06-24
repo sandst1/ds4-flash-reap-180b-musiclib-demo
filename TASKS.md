@@ -156,7 +156,7 @@
 
 ## Phase 10: TypeScript — Client Source
 
-- [ ] **T38 — Convert API client to TS**  
+- [x] **T38 — Convert API client to TS**  
   Rename `client/src/api/client.js` → `client.ts`. Type all function params and return types using the shared entity types.  
   Rename `client/src/api/client.test.js` → `client.test.ts`.
 

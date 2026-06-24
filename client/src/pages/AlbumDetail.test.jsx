@@ -9,7 +9,7 @@ vi.mock('../api/client.js', () => ({
   getAlbumSongs: vi.fn(),
 }));
 
-import { getAlbum, getAlbumSongs } from '../api/client.js';
+import { getAlbum, getAlbumSongs } from '../api/client';
 import { AlbumDetail } from './AlbumDetail.jsx';
 
 function renderIt(id = '1') {

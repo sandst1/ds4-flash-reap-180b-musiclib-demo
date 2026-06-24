@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getPlaylists, createPlaylist, updatePlaylist, deletePlaylist } from '../api/client.js';
+import { getPlaylists, createPlaylist, updatePlaylist, deletePlaylist } from '../api/client';
 
 function PlaylistsList() {
   const [playlists, setPlaylists] = useState([]);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getAlbum, updateAlbum, deleteAlbum, getAlbumSongs } from '../api/client.js';
+import { getAlbum, updateAlbum, deleteAlbum, getAlbumSongs } from '../api/client';
 
 function AlbumDetail() {
   const { id } = useParams();

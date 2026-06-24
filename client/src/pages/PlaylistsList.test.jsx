@@ -9,7 +9,7 @@ vi.mock('../api/client.js', () => ({
   deletePlaylist: vi.fn(),
 }));
 
-import { getPlaylists } from '../api/client.js';
+import { getPlaylists } from '../api/client';
 import { PlaylistsList } from './PlaylistsList.jsx';
 
 function renderIt() {

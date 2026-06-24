@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getArtist, updateArtist, deleteArtist, getArtistAlbums, createAlbum, updateAlbum, deleteAlbum } from '../api/client.js';
+import { getArtist, updateArtist, deleteArtist, getArtistAlbums, createAlbum, updateAlbum, deleteAlbum } from '../api/client';
 
 function ArtistDetail() {
   const { id } = useParams();

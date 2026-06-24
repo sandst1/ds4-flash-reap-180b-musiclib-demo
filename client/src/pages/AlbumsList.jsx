@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAlbums, getArtists, createAlbum, updateAlbum, deleteAlbum } from '../api/client.js';
+import { getAlbums, getArtists, createAlbum, updateAlbum, deleteAlbum } from '../api/client';
 
 function AlbumsList() {
   const [albums, setAlbums] = useState([]);
