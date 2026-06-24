@@ -1,14 +1,14 @@
-import { Database } from './sqlite.js';
+import { Database } from './sqlite.ts';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DB_PATH = process.env.DB_PATH || resolve(__dirname, '..', 'data', 'musiclib.db');
+const DB_PATH: string = process.env.DB_PATH || resolve(__dirname, '..', 'data', 'musiclib.db');
 
-let db;
+let db: Database | undefined;
 
-export function getDb() {
+export function getDb(): Database {
   if (!db) {
     db = new Database(DB_PATH);
     db.pragma('journal_mode = WAL');
@@ -18,13 +18,13 @@ export function getDb() {
   return db;
 }
 
-function initSchema(database) {
+function initSchema(database: Database): void {
   const schemaPath = resolve(dirname(fileURLToPath(import.meta.url)), 'schema.sql');
   const sql = readFileSync(schemaPath, 'utf-8');
   database.exec(sql);
 }
 
-export function seedDb(database) {
+export function seedDb(database: Database): void {
   const seedPath = resolve(dirname(fileURLToPath(import.meta.url)), 'seed.sql');
   const sql = readFileSync(seedPath, 'utf-8');
   database.exec(sql);

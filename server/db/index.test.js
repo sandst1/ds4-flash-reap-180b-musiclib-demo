@@ -7,7 +7,7 @@ process.env.DB_PATH = ':memory:';
 let mod;
 
 beforeAll(async () => {
-  mod = await import('./index.js');
+  mod = await import('./index.ts');
 });
 
 afterAll(() => {

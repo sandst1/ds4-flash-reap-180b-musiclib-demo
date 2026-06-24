@@ -117,7 +117,7 @@
 
 ## Phase 9: TypeScript — Server Source
 
-- [ ] **T29 — Convert DB layer to TS**  
+- [x] **T29 — Convert DB layer to TS**  
   Rename `server/db/sqlite.js` → `sqlite.ts`. Add typed wrapper: type `Stmt` from `node:sqlite`, return types for `prepare().all()`, `.get()`, `.run()`.  
   Rename `server/db/index.js` → `index.ts`. Type `getDb()` return, `seedDb()` param.  
   Update all imports inside the files and in `tsconfig.json` includes.
