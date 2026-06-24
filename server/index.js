@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.static(resolve('client', 'dist')));
 
 // API routes
-import { router as artistsRouter } from './routes/artists.js';
+import { router as artistsRouter } from './routes/artists.ts';
 import { router as albumsRouter } from './routes/albums.js';
 import { router as songsRouter } from './routes/songs.js';
 import { router as playlistsRouter } from './routes/playlists.js';

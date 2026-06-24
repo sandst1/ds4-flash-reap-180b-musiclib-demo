@@ -126,7 +126,7 @@
   Rename `server/middleware/errorHandler.js` → `errorHandler.ts`. Type the Express error-handling signature `(err: Error, req: Request, res: Response, next: NextFunction)`.  
   Rename `server/middleware/errorHandler.test.js` → `errorHandler.test.ts`.
 
-- [ ] **T31 — Convert artists route to TS**  
+- [x] **T31 — Convert artists route to TS**  
   Rename `server/routes/artists.js` → `artists.ts`. Add types to `req.body`, `req.params`, response types.  
   Rename `server/routes/artists.test.js` → `artists.test.ts`. Add `supertest` types.
 

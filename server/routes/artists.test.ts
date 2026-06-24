@@ -1,18 +1,20 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
-import { errorHandler } from '../middleware/errorHandler.js';
+import { errorHandler } from '../middleware/errorHandler.ts';
+import type { Artist } from '../types.ts';
 
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
 
-let db, request;
+let db: import('../db/sqlite.ts').Database;
+let request: ReturnType<typeof supertest>;
 
 beforeAll(async () => {
-  const mod = await import('../db/index.js');
+  const mod = await import('../db/index.ts');
   db = mod.getDb();
 
-  const { router } = await import('./artists.js');
+  const { router } = await import('./artists.ts');
 
   const app = express();
   app.use(express.json());
@@ -37,7 +39,7 @@ describe('artists API', () => {
   });
 
   describe('CRUD operations', () => {
-    let createdId;
+    let createdId: number;
 
     it('POST /api/artists creates a new artist', async () => {
       const res = await request.post('/api/artists').send({ name: 'Test Artist', bio: 'Test bio' });
@@ -118,39 +120,39 @@ describe('artists API', () => {
       const albumInfo = db.prepare(
         'INSERT INTO albums (artist_id, title, release_year) VALUES (?, ?, ?)'
       ).run(artistId, 'Test Album', 2000);
-      const albumId = albumInfo.lastInsertRowid;
+      const albumId = albumInfo.lastInsertRowid as number;
 
       db.prepare(
         'INSERT INTO songs (album_id, title, track_num, duration_sec) VALUES (?, ?, ?, ?)'
       ).run(albumId, 'Test Song', 1, 120);
 
-      expect(db.prepare('SELECT COUNT(*) AS count FROM albums WHERE id = ?').get(albumId).count).toBe(1);
-      expect(db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId).count).toBe(1);
+      expect((db.prepare('SELECT COUNT(*) AS count FROM albums WHERE id = ?').get(albumId) as { count: number }).count).toBe(1);
+      expect((db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId) as { count: number }).count).toBe(1);
 
       const delRes = await request.delete(`/api/artists/${artistId}`);
       expect(delRes.status).toBe(204);
 
-      expect(db.prepare('SELECT COUNT(*) AS count FROM artists WHERE id = ?').get(artistId).count).toBe(0);
-      expect(db.prepare('SELECT COUNT(*) AS count FROM albums WHERE id = ?').get(albumId).count).toBe(0);
-      const songRows = db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId);
+      expect((db.prepare('SELECT COUNT(*) AS count FROM artists WHERE id = ?').get(artistId) as { count: number }).count).toBe(0);
+      expect((db.prepare('SELECT COUNT(*) AS count FROM albums WHERE id = ?').get(albumId) as { count: number }).count).toBe(0);
+      const songRows = db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId) as { count: number };
       expect(songRows.count).toBe(0);
     });
   });
 
   describe('GET /api/artists/:id/albums', () => {
-    let artistWithAlbums;
-    let artistWithoutAlbums;
+    let artistWithAlbums: number;
+    let artistWithoutAlbums: number;
 
     beforeAll(() => {
-      artistWithAlbums = db.prepare(
+      artistWithAlbums = (db.prepare(
         'INSERT INTO artists (name) VALUES (?)'
-      ).run('Album Artist').lastInsertRowid;
+      ).run('Album Artist').lastInsertRowid as number);
       db.prepare('INSERT INTO albums (artist_id, title, release_year) VALUES (?, ?, ?)').run(artistWithAlbums, 'Album A', 1999);
       db.prepare('INSERT INTO albums (artist_id, title, release_year) VALUES (?, ?, ?)').run(artistWithAlbums, 'Album B', 2001);
 
-      artistWithoutAlbums = db.prepare(
+      artistWithoutAlbums = (db.prepare(
         'INSERT INTO artists (name) VALUES (?)'
-      ).run('Lone Artist').lastInsertRowid;
+      ).run('Lone Artist').lastInsertRowid as number);
     });
 
     it('returns albums for an artist that has them', async () => {
