@@ -46,8 +46,8 @@ musiclib/
 │   │   │   ├── SongsList.jsx
 │   │   │   ├── PlaylistsList.jsx
 │   │   │   └── PlaylistDetail.jsx
-│   │   ├── App.jsx
-│   │   └── main.jsx
+│   │   ├── App.tsx
+│   │   └── main.tsx
 │   ├── index.html
 │   └── vite.config.js
 │

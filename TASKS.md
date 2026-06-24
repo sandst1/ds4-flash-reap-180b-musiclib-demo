@@ -183,7 +183,7 @@
   Rename `client/src/pages/PlaylistDetail.jsx` → `PlaylistDetail.tsx`.  
   Rename their `.test.jsx` → `.test.tsx` counterparts.
 
-- [ ] **T43 — Convert App shell & entry point to TS**  
+- [x] **T43 — Convert App shell & entry point to TS**  
   Rename `client/src/App.jsx` → `App.tsx`.  
   Rename `client/src/main.jsx` → `main.tsx`.  
   Update `index.html` script src to `main.tsx` (Vite handles this).  
