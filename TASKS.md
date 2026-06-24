@@ -191,7 +191,7 @@
 
 ## Phase 11: TypeScript — Config & Build Integration
 
-- [ ] **T44 — Update vitest configs for TS**  
+- [x] **T44 — Update vitest configs for TS**  
   Update `server/vitest.config.js` include patterns to `['**/*.test.ts']`.  
   Update `client/vitest.config.js` include patterns to `['**/*.test.ts', '**/*.test.tsx']`.  
   Ensure vitest picks up tsconfig.
