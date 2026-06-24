@@ -1,24 +1,30 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
-import { errorHandler } from '../middleware/errorHandler.js';
+import { errorHandler } from '../middleware/errorHandler.ts';
+import type { Database } from '../db/sqlite.ts';
 
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
 
-let db, request, playlistId, songId1, songId2, albumId;
+let db: Database;
+let request: ReturnType<typeof supertest>;
+let playlistId: number;
+let songId1: number;
+let songId2: number;
+let albumId: number;
 
 beforeAll(async () => {
-  const mod = await import('../db/index.js');
+  const mod = await import('../db/index.ts');
   db = mod.getDb();
 
-  const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid;
-  albumId = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Test Album').lastInsertRowid;
-  songId1 = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song One', 1).lastInsertRowid;
-  songId2 = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song Two', 2).lastInsertRowid;
-  playlistId = db.prepare('INSERT INTO playlists (name) VALUES (?)').run('Test Playlist').lastInsertRowid;
+  const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid as number;
+  albumId = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Test Album').lastInsertRowid as number;
+  songId1 = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song One', 1).lastInsertRowid as number;
+  songId2 = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song Two', 2).lastInsertRowid as number;
+  playlistId = db.prepare('INSERT INTO playlists (name) VALUES (?)').run('Test Playlist').lastInsertRowid as number;
 
-  const { router } = await import('./playlistSongs.js');
+  const { router } = await import('./playlistSongs.ts');
 
   const app = express();
   app.use(express.json());
@@ -106,7 +112,7 @@ describe('playlist songs API', () => {
 
       const getRes = await request.get(`/api/playlists/${playlistId}/songs`);
       expect(getRes.body).toHaveLength(2);
-      getRes.body.forEach(s => expect(s.id).toBe(songId1));
+      (getRes.body as { id: number }[]).forEach(s => expect(s.id).toBe(songId1));
     });
 
     it('DELETE /api/playlists/:id/songs/:songId returns 404 for unknown playlist', async () => {
@@ -123,13 +129,16 @@ describe('playlist songs API', () => {
   });
 
   describe('reorder', () => {
-    let reorderPlaylistId, songIdA, songIdB, songIdC;
+    let reorderPlaylistId: number;
+    let songIdA: number;
+    let songIdB: number;
+    let songIdC: number;
 
     beforeAll(() => {
-      reorderPlaylistId = db.prepare('INSERT INTO playlists (name) VALUES (?)').run('Reorder Playlist').lastInsertRowid;
-      songIdA = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song A', 10).lastInsertRowid;
-      songIdB = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song B', 11).lastInsertRowid;
-      songIdC = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song C', 12).lastInsertRowid;
+      reorderPlaylistId = db.prepare('INSERT INTO playlists (name) VALUES (?)').run('Reorder Playlist').lastInsertRowid as number;
+      songIdA = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song A', 10).lastInsertRowid as number;
+      songIdB = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song B', 11).lastInsertRowid as number;
+      songIdC = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Song C', 12).lastInsertRowid as number;
       db.prepare('INSERT INTO playlist_songs (playlist_id, song_id, position) VALUES (?, ?, ?)').run(reorderPlaylistId, songIdA, 1);
       db.prepare('INSERT INTO playlist_songs (playlist_id, song_id, position) VALUES (?, ?, ?)').run(reorderPlaylistId, songIdB, 2);
       db.prepare('INSERT INTO playlist_songs (playlist_id, song_id, position) VALUES (?, ?, ?)').run(reorderPlaylistId, songIdC, 3);

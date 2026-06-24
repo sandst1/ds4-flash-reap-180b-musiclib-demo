@@ -1,19 +1,19 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
-import { errorHandler } from '../middleware/errorHandler.js';
+import { errorHandler } from '../middleware/errorHandler.ts';
 
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
 
-let request;
+let request: ReturnType<typeof supertest>;
 
 beforeAll(async () => {
-  const mod = await import('../db/index.js');
+  const mod = await import('../db/index.ts');
   const db = mod.getDb();
   mod.seedDb(db);
 
-  const { router } = await import('./stats.js');
+  const { router } = await import('./stats.ts');
 
   const app = express();
   app.use(express.json());
