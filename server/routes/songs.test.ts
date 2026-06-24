@@ -1,21 +1,23 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
-import { errorHandler } from '../middleware/errorHandler.js';
+import { errorHandler } from '../middleware/errorHandler.ts';
 
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
 
-let db, request, albumId;
+let db: import('../db/sqlite.ts').Database;
+let request: ReturnType<typeof supertest>;
+let albumId: number;
 
 beforeAll(async () => {
-  const mod = await import('../db/index.js');
+  const mod = await import('../db/index.ts');
   db = mod.getDb();
 
-  const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid;
-  albumId = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Test Album').lastInsertRowid;
+  const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid as number;
+  albumId = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Test Album').lastInsertRowid as number;
 
-  const { router } = await import('./songs.js');
+  const { router } = await import('./songs.ts');
 
   const app = express();
   app.use(express.json());
@@ -40,7 +42,7 @@ describe('songs API', () => {
   });
 
   describe('CRUD operations', () => {
-    let createdId;
+    let createdId: number;
 
     it('POST /api/songs creates a new song', async () => {
       const res = await request.post('/api/songs').send({ album_id: albumId, title: 'Test Song', track_num: 1, duration_sec: 180 });
@@ -128,12 +130,12 @@ describe('songs API', () => {
   });
 
   describe('GET /api/songs filtered by ?album_id', () => {
-    let albumA, albumB;
+    let albumA: number, albumB: number;
 
     beforeAll(() => {
-      const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Filter Artist').lastInsertRowid;
-      albumA = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Album A').lastInsertRowid;
-      albumB = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Album B').lastInsertRowid;
+      const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Filter Artist').lastInsertRowid as number;
+      albumA = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Album A').lastInsertRowid as number;
+      albumB = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Album B').lastInsertRowid as number;
       db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumA, 'AA Song 1', 1);
       db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumA, 'AA Song 2', 2);
       db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumB, 'BB Song 1', 1);
@@ -143,12 +145,12 @@ describe('songs API', () => {
       const res = await request.get(`/api/songs?album_id=${albumA}`);
       expect(res.status).toBe(200);
       expect(res.body).toHaveLength(2);
-      res.body.forEach(s => expect(s.album_id).toBe(albumA));
+      res.body.forEach((s: { album_id: number }) => expect(s.album_id).toBe(albumA));
     });
 
     it('returns empty list for album with no songs', async () => {
-      const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Lone Artist').lastInsertRowid;
-      const emptyAlbum = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Empty Album').lastInsertRowid;
+      const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Lone Artist').lastInsertRowid as number;
+      const emptyAlbum = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Empty Album').lastInsertRowid as number;
       const res = await request.get(`/api/songs?album_id=${emptyAlbum}`);
       expect(res.status).toBe(200);
       expect(res.body).toEqual([]);

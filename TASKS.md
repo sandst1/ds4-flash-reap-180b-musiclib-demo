@@ -134,7 +134,7 @@
   Rename `server/routes/albums.js` → `albums.ts`. Same treatment as artists.  
   Rename `server/routes/albums.test.js` → `albums.test.ts`.
 
-- [ ] **T33 — Convert songs route to TS**  
+- [x] **T33 — Convert songs route to TS**  
   Rename `server/routes/songs.js` → `songs.ts`.  
   Rename `server/routes/songs.test.js` → `songs.test.ts`.
 
