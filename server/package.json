@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node index.js",
+    "dev": "tsx index.ts",
     "test": "vitest run"
   },
   "dependencies": {

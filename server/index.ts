@@ -1,13 +1,19 @@
-import express from 'express';
+import express, { type Request, type Response, type NextFunction } from 'express';
 import { resolve } from 'node:path';
 import { errorHandler } from './middleware/errorHandler.ts';
-import { getDb, seedDb } from './db/index.js';
+import { getDb, seedDb } from './db/index.ts';
+import { router as artistsRouter } from './routes/artists.ts';
+import { router as albumsRouter } from './routes/albums.ts';
+import { router as songsRouter } from './routes/songs.ts';
+import { router as playlistsRouter } from './routes/playlists.ts';
+import { router as playlistSongsRouter } from './routes/playlistSongs.ts';
+import { router as statsRouter } from './routes/stats.ts';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // CORS
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.set('Access-Control-Allow-Headers', 'Content-Type');
@@ -22,12 +28,6 @@ app.use(express.json());
 app.use(express.static(resolve('client', 'dist')));
 
 // API routes
-import { router as artistsRouter } from './routes/artists.ts';
-import { router as albumsRouter } from './routes/albums.js';
-import { router as songsRouter } from './routes/songs.ts';
-import { router as playlistsRouter } from './routes/playlists.ts';
-import { router as playlistSongsRouter } from './routes/playlistSongs.ts';
-import { router as statsRouter } from './routes/stats.ts';
 app.use('/api/stats', statsRouter);
 app.use('/api/artists', artistsRouter);
 app.use('/api/albums', albumsRouter);

@@ -5,5 +5,5 @@
     "rootDir": ".",
     "composite": true
   },
-  "include": ["src/**/*.ts", "db/**/*.ts", "middleware/**/*.ts", "routes/**/*.ts", "types.ts", "../types/**/*.ts"]
+  "include": ["index.ts", "src/**/*.ts", "db/**/*.ts", "middleware/**/*.ts", "routes/**/*.ts", "types.ts", "../types/**/*.ts"]
 }
