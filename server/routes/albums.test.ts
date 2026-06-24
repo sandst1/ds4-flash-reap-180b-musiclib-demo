@@ -1,20 +1,22 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
-import { errorHandler } from '../middleware/errorHandler.js';
+import { errorHandler } from '../middleware/errorHandler.ts';
 
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
 
-let db, request, artistId;
+let db: import('../db/sqlite.ts').Database;
+let request: ReturnType<typeof supertest>;
+let artistId: number;
 
 beforeAll(async () => {
-  const mod = await import('../db/index.js');
+  const mod = await import('../db/index.ts');
   db = mod.getDb();
 
-  artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid;
+  artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid as number;
 
-  const { router } = await import('./albums.js');
+  const { router } = await import('./albums.ts');
 
   const app = express();
   app.use(express.json());
@@ -39,7 +41,7 @@ describe('albums API', () => {
   });
 
   describe('CRUD operations', () => {
-    let createdId;
+    let createdId: number;
 
     it('POST /api/albums creates a new album', async () => {
       const res = await request.post('/api/albums').send({ artist_id: artistId, title: 'Test Album', release_year: 2000 });
@@ -129,28 +131,28 @@ describe('albums API', () => {
       const albumInfo = db.prepare(
         'INSERT INTO albums (artist_id, title, release_year) VALUES (?, ?, ?)'
       ).run(artistId, 'Cascade Album', 2000);
-      const albumId = albumInfo.lastInsertRowid;
+      const albumId = albumInfo.lastInsertRowid as number;
 
       db.prepare(
         'INSERT INTO songs (album_id, title, track_num, duration_sec) VALUES (?, ?, ?, ?)'
       ).run(albumId, 'Test Song', 1, 120);
 
-      expect(db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId).count).toBe(1);
+      expect((db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId) as { count: number }).count).toBe(1);
 
       const delRes = await request.delete(`/api/albums/${albumId}`);
       expect(delRes.status).toBe(204);
 
-      expect(db.prepare('SELECT COUNT(*) AS count FROM albums WHERE id = ?').get(albumId).count).toBe(0);
-      expect(db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId).count).toBe(0);
+      expect((db.prepare('SELECT COUNT(*) AS count FROM albums WHERE id = ?').get(albumId) as { count: number }).count).toBe(0);
+      expect((db.prepare('SELECT COUNT(*) AS count FROM songs WHERE album_id = ?').get(albumId) as { count: number }).count).toBe(0);
     });
   });
 
   describe('GET /api/albums filtered by ?artist_id', () => {
-    let artistA, artistB;
+    let artistA: number, artistB: number;
 
     beforeAll(() => {
-      artistA = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Artist A').lastInsertRowid;
-      artistB = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Artist B').lastInsertRowid;
+      artistA = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Artist A').lastInsertRowid as number;
+      artistB = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Artist B').lastInsertRowid as number;
       db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistA, 'AA Album 1');
       db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistA, 'AA Album 2');
       db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistB, 'BB Album 1');
@@ -160,11 +162,11 @@ describe('albums API', () => {
       const res = await request.get(`/api/albums?artist_id=${artistA}`);
       expect(res.status).toBe(200);
       expect(res.body).toHaveLength(2);
-      res.body.forEach(a => expect(a.artist_id).toBe(artistA));
+      res.body.forEach((a: { artist_id: number }) => expect(a.artist_id).toBe(artistA));
     });
 
     it('returns empty list for artist with no albums', async () => {
-      const loneArtist = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Lone Artist').lastInsertRowid;
+      const loneArtist = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Lone Artist').lastInsertRowid as number;
       const res = await request.get(`/api/albums?artist_id=${loneArtist}`);
       expect(res.status).toBe(200);
       expect(res.body).toEqual([]);
@@ -172,19 +174,19 @@ describe('albums API', () => {
   });
 
   describe('GET /api/albums/:id/songs', () => {
-    let albumWithSongs;
-    let albumWithoutSongs;
+    let albumWithSongs: number;
+    let albumWithoutSongs: number;
 
     beforeAll(() => {
       albumWithSongs = db.prepare(
         'INSERT INTO albums (artist_id, title) VALUES (?, ?)'
-      ).run(artistId, 'Songs Album').lastInsertRowid;
+      ).run(artistId, 'Songs Album').lastInsertRowid as number;
       db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumWithSongs, 'Song A', 1);
       db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumWithSongs, 'Song B', 2);
 
       albumWithoutSongs = db.prepare(
         'INSERT INTO albums (artist_id, title) VALUES (?, ?)'
-      ).run(artistId, 'Empty Album').lastInsertRowid;
+      ).run(artistId, 'Empty Album').lastInsertRowid as number;
     });
 
     it('returns songs for an album that has them', async () => {

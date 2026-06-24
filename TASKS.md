@@ -130,7 +130,7 @@
   Rename `server/routes/artists.js` → `artists.ts`. Add types to `req.body`, `req.params`, response types.  
   Rename `server/routes/artists.test.js` → `artists.test.ts`. Add `supertest` types.
 
-- [ ] **T32 — Convert albums route to TS**  
+- [x] **T32 — Convert albums route to TS**  
   Rename `server/routes/albums.js` → `albums.ts`. Same treatment as artists.  
   Rename `server/routes/albums.test.js` → `albums.test.ts`.
 
