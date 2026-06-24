@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { NavBar } from './NavBar.jsx';
+import { NavBar } from './NavBar.tsx';
 
-function renderAt(url) {
+function renderAt(url: string) {
   return render(
     <MemoryRouter initialEntries={[url]}>
       <NavBar />

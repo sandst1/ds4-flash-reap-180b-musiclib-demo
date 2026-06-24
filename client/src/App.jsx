@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/Layout.jsx';
+import { Layout } from './components/Layout.tsx';
 import { Dashboard } from './pages/Dashboard.jsx';
 import { ArtistsList } from './pages/ArtistsList.jsx';
 import { ArtistDetail } from './pages/ArtistDetail.jsx';

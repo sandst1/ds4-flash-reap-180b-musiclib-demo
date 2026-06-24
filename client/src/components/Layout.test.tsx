@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Layout } from './Layout.jsx';
+import type { ReactNode } from 'react';
+import { Layout } from './Layout.tsx';
 
-function renderWithRouter(ui, url = '/') {
+function renderWithRouter(ui: ReactNode, url = '/') {
   return render(
     <MemoryRouter initialEntries={[url]}>
       {ui}
