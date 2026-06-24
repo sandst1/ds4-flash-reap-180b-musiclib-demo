@@ -1,10 +1,12 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import type { Database } from './sqlite.ts';
 
 // Set in-memory DB before any module code runs
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
 
-let mod;
+type Module = { getDb: () => Database; seedDb: (db: Database) => void };
+let mod: Module;
 
 beforeAll(async () => {
   mod = await import('./index.ts');
@@ -27,7 +29,7 @@ describe('database layer', () => {
 
   it('creates all expected tables on init', () => {
     const db = mod.getDb();
-    const rows = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all();
+    const rows = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all() as { name: string }[];
     const names = rows.map(r => r.name);
     expect(names).toEqual(['albums', 'artists', 'playlist_songs', 'playlists', 'songs']);
   });
@@ -36,9 +38,9 @@ describe('database layer', () => {
     const db = mod.getDb();
     mod.seedDb(db);
 
-    const artists = db.prepare('SELECT COUNT(*) AS count FROM artists').get();
-    const albums = db.prepare('SELECT COUNT(*) AS count FROM albums').get();
-    const songs = db.prepare('SELECT COUNT(*) AS count FROM songs').get();
+    const artists = db.prepare('SELECT COUNT(*) AS count FROM artists').get() as { count: number };
+    const albums = db.prepare('SELECT COUNT(*) AS count FROM albums').get() as { count: number };
+    const songs = db.prepare('SELECT COUNT(*) AS count FROM songs').get() as { count: number };
 
     expect(artists.count).toBe(2);
     expect(albums.count).toBe(3);
@@ -47,7 +49,7 @@ describe('database layer', () => {
 
   it('uses :memory: database', () => {
     const db = mod.getDb();
-    const result = db.prepare("SELECT sqlite_version() AS v").get();
+    const result = db.prepare("SELECT sqlite_version() AS v").get() as { v: string };
     expect(result.v).toBeTruthy();
   });
 });

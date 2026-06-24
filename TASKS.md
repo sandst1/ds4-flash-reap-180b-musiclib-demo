@@ -151,7 +151,7 @@
 - [x] **T36 — Convert server entry point to TS**  
   Rename `server/index.js` → `index.ts`. Type the Express app. Update `import.meta.url` polyfill if needed. Update `package.json` dev script to use `tsx` or `ts-node/esm`.
 
-- [ ] **T37 — Convert remaining server test files to TS**  
+- [x] **T37 — Convert remaining server test files to TS**  
   Rename `server/db/index.test.js` → `index.test.ts`. Verify all tests compile.
 
 ## Phase 10: TypeScript — Client Source
