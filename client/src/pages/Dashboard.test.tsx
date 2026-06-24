@@ -7,7 +7,7 @@ vi.mock('../api/client.js', () => ({
 }));
 
 import { getStats } from '../api/client';
-import { Dashboard } from './Dashboard.jsx';
+import { Dashboard } from './Dashboard.tsx';
 
 function renderIt() {
   return render(

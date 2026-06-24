@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout.tsx';
-import { Dashboard } from './pages/Dashboard.jsx';
-import { ArtistsList } from './pages/ArtistsList.jsx';
-import { ArtistDetail } from './pages/ArtistDetail.jsx';
+import { Dashboard } from './pages/Dashboard.tsx';
+import { ArtistsList } from './pages/ArtistsList.tsx';
+import { ArtistDetail } from './pages/ArtistDetail.tsx';
 import { AlbumDetail } from './pages/AlbumDetail.jsx';
 import { AlbumsList } from './pages/AlbumsList.jsx';
 import { SongsList } from './pages/SongsList.jsx';

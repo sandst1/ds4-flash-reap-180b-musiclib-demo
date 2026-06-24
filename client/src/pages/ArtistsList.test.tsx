@@ -10,7 +10,7 @@ vi.mock('../api/client.js', () => ({
 }));
 
 import { getArtists } from '../api/client';
-import { ArtistsList } from './ArtistsList.jsx';
+import { ArtistsList } from './ArtistsList.tsx';
 
 function renderIt() {
   return render(

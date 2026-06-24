@@ -160,13 +160,13 @@
   Rename `client/src/api/client.js` → `client.ts`. Type all function params and return types using the shared entity types.  
   Rename `client/src/api/client.test.js` → `client.test.ts`.
 
-- [ ] **T39 — Convert shared components to TS**  
+- [x] **T39 — Convert shared components to TS**  
   Rename `client/src/components/Layout.jsx` → `Layout.tsx`. Type the `children` prop.  
   Rename `client/src/components/NavBar.jsx` → `NavBar.tsx`.  
   Rename `client/src/components/Layout.test.jsx` → `Layout.test.tsx`.  
   Rename `client/src/components/NavBar.test.jsx` → `NavBar.test.tsx`.
 
-- [ ] **T40 — Convert Dashboard & Artists pages to TS**  
+- [x] **T40 — Convert Dashboard & Artists pages to TS**  
   Rename `client/src/pages/Dashboard.jsx` → `Dashboard.tsx`.  
   Rename `client/src/pages/ArtistsList.jsx` → `ArtistsList.tsx`.  
   Rename `client/src/pages/ArtistDetail.jsx` → `ArtistDetail.tsx`.  
