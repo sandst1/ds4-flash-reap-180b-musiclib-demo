@@ -1,23 +1,25 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
-import { errorHandler } from '../middleware/errorHandler.js';
+import { errorHandler } from '../middleware/errorHandler.ts';
 
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
 
-let db, request, songId;
+let db: import('../db/sqlite.ts').Database;
+let request: ReturnType<typeof supertest>;
+let songId: number;
 
 beforeAll(async () => {
-  const mod = await import('../db/index.js');
+  const mod = await import('../db/index.ts');
   db = mod.getDb();
 
   // Create prerequisite: artist → album → song (for playlist with songs test)
-  const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid;
-  const albumId = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Test Album').lastInsertRowid;
-  songId = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Test Song', 1).lastInsertRowid;
+  const artistId = db.prepare('INSERT INTO artists (name) VALUES (?)').run('Test Artist').lastInsertRowid as number;
+  const albumId = db.prepare('INSERT INTO albums (artist_id, title) VALUES (?, ?)').run(artistId, 'Test Album').lastInsertRowid as number;
+  songId = db.prepare('INSERT INTO songs (album_id, title, track_num) VALUES (?, ?, ?)').run(albumId, 'Test Song', 1).lastInsertRowid as number;
 
-  const { router } = await import('./playlists.js');
+  const { router } = await import('./playlists.ts');
 
   const app = express();
   app.use(express.json());
@@ -42,7 +44,7 @@ describe('playlists API', () => {
   });
 
   describe('CRUD operations', () => {
-    let createdId;
+    let createdId: number;
 
     it('POST /api/playlists creates a new playlist', async () => {
       const res = await request.post('/api/playlists').send({ name: 'Test Playlist', description: 'Test desc' });

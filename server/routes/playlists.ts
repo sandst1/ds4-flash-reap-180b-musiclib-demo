@@ -1,17 +1,18 @@
-import { Router } from 'express';
-import { getDb } from '../db/index.js';
+import { Router, type Request, type Response } from 'express';
+import { getDb } from '../db/index.ts';
+import type { Playlist, PlaylistWithSongs } from '../types.ts';
 
 const router = Router();
 
 // GET /api/playlists — list all playlists
-router.get('/', (req, res) => {
+router.get('/', (_req: Request, res: Response) => {
   const db = getDb();
-  const playlists = db.prepare('SELECT * FROM playlists ORDER BY name').all();
+  const playlists = db.prepare('SELECT * FROM playlists ORDER BY name').all() as Playlist[];
   res.json(playlists);
 });
 
 // POST /api/playlists — create playlist
-router.post('/', (req, res) => {
+router.post('/', (req: Request, res: Response) => {
   const { name, description } = req.body;
   if (!name || typeof name !== 'string' || !name.trim()) {
     return res.status(400).json({ error: 'name is required', status: 400 });
@@ -20,14 +21,14 @@ router.post('/', (req, res) => {
   const info = db.prepare(
     'INSERT INTO playlists (name, description) VALUES (?, ?)'
   ).run(name.trim(), description ?? null);
-  const playlist = db.prepare('SELECT * FROM playlists WHERE id = ?').get(info.lastInsertRowid);
+  const playlist = db.prepare('SELECT * FROM playlists WHERE id = ?').get(info.lastInsertRowid) as Playlist;
   res.status(201).json(playlist);
 });
 
 // GET /api/playlists/:id — get playlist by ID (includes joined songs)
-router.get('/:id', (req, res) => {
+router.get('/:id', (req: Request, res: Response) => {
   const db = getDb();
-  const playlist = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id);
+  const playlist = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id) as Playlist | undefined;
   if (!playlist) {
     return res.status(404).json({ error: 'Playlist not found', status: 404 });
   }
@@ -38,15 +39,15 @@ router.get('/:id', (req, res) => {
      WHERE ps.playlist_id = ?
      ORDER BY ps.position`
   ).all(req.params.id);
-  playlist.songs = songs;
+  (playlist as PlaylistWithSongs).songs = songs;
   res.json(playlist);
 });
 
 // PUT /api/playlists/:id — update playlist
-router.put('/:id', (req, res) => {
+router.put('/:id', (req: Request, res: Response) => {
   const { name, description } = req.body;
   const db = getDb();
-  const existing = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id);
+  const existing = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id) as Playlist | undefined;
   if (!existing) {
     return res.status(404).json({ error: 'Playlist not found', status: 404 });
   }
@@ -60,14 +61,14 @@ router.put('/:id', (req, res) => {
     description !== undefined ? description : existing.description,
     req.params.id
   );
-  const playlist = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id);
+  const playlist = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id) as Playlist;
   res.json(playlist);
 });
 
 // DELETE /api/playlists/:id — delete playlist
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req: Request, res: Response) => {
   const db = getDb();
-  const existing = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id);
+  const existing = db.prepare('SELECT * FROM playlists WHERE id = ?').get(req.params.id) as Playlist | undefined;
   if (!existing) {
     return res.status(404).json({ error: 'Playlist not found', status: 404 });
   }

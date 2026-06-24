@@ -138,7 +138,7 @@
   Rename `server/routes/songs.js` → `songs.ts`.  
   Rename `server/routes/songs.test.js` → `songs.test.ts`.
 
-- [ ] **T34 — Convert playlists route to TS**  
+- [x] **T34 — Convert playlists route to TS**  
   Rename `server/routes/playlists.js` → `playlists.ts`.  
   Rename `server/routes/playlists.test.js` → `playlists.test.ts`.
 
