@@ -199,7 +199,7 @@
 - [x] **T45 — Update eslint config for TS**  
   Add `typescript-eslint` parser and plugin to `eslint.config.js`. Update file globs to include `**/*.ts`, `**/*.tsx`. Add ignores for `dist/`. Remove JSX-specific rules that don't apply to TS.
 
-- [ ] **T46 — Update npm scripts and verify build**  
+- [x] **T46 — Update npm scripts and verify build**  
   Update `package.json` typecheck script to `tsc --noEmit` (run separately for server and client, or use project references).  
   Update `npm run build` if server needs compilation.  
   Run `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build` — all pass.

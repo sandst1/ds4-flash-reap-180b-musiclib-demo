@@ -6,3 +6,5 @@ dist/
 *.db-wal
 *.sqlite
 .DS_Store
+*.tsbuildinfo
+opencode-loop-output/
