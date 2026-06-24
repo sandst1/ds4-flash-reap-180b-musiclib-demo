@@ -92,3 +92,174 @@
 
 - [x] **T25 — Page component tests**  
   `client/src/pages/*.test.jsx` — each page tested for: **loading** state (shows loading text), **error** state (shows error message in red), **empty** state (shows empty message), **populated** state (renders table/list with correct data). Mock API client functions via `vi.mock()`. Use `MemoryRouter` wrapper for pages that use `<Link>` or `useParams`. For detail pages, verify fetch is called with the correct `id` param. For PlaylistDetail, test move-up/move-down reorder interaction.
+
+---
+
+## Phase 8: TypeScript — Tooling & Shared Types
+
+- [x] **T26 — Install TypeScript dependencies**  
+  Install `typescript` in root and both workspaces. Install `@types/node`, `@types/express` in server workspace. Add `@types/react`, `@types/react-dom` (already bundled by vite but add for `tsc`), `@types/react-router-dom` to client workspace. Install `tsx` (or `ts-node`) for running TS directly in dev.
+
+- [ ] **T27 — Create tsconfig files**  
+  Root `tsconfig.base.json` with shared compiler options (`strict: true`, `moduleResolution: bundler`, `esModuleInterop: true`, `skipLibCheck: true`).  
+  `server/tsconfig.json` — extends base, `outDir: dist`, includes `src/**.ts`.  
+  `client/tsconfig.json` — extends base, `jsx: react-jsx`, includes `src/**.ts`, `src/**.tsx`.  
+  Update `eslint.config.js` to handle `.ts`/`.tsx` files using the typescript-eslint plugin.
+
+- [ ] **T28 — Create shared type definitions**  
+  Create `types/index.d.ts` (or `types.ts`) with interfaces for all entities:
+  - `Artist`, `Album`, `Song`, `Playlist`, `PlaylistSong` (full row types)
+  - `ArtistInput`, `AlbumInput`, `SongInput`, `PlaylistInput` (create/update payloads)
+  - `Stats` (dashboard counts)
+  - `ApiError` (`{ error: string; status: number }`)
+  - `PlaylistWithSongs` (playlist + nested songs array)
+  - Re-export from `server/types.ts` and `client/src/types.ts` (or keep one shared location).
+
+## Phase 9: TypeScript — Server Source
+
+- [ ] **T29 — Convert DB layer to TS**  
+  Rename `server/db/sqlite.js` → `sqlite.ts`. Add typed wrapper: type `Stmt` from `node:sqlite`, return types for `prepare().all()`, `.get()`, `.run()`.  
+  Rename `server/db/index.js` → `index.ts`. Type `getDb()` return, `seedDb()` param.  
+  Update all imports inside the files and in `tsconfig.json` includes.
+
+- [ ] **T30 — Convert middleware to TS**  
+  Rename `server/middleware/errorHandler.js` → `errorHandler.ts`. Type the Express error-handling signature `(err: Error, req: Request, res: Response, next: NextFunction)`.  
+  Rename `server/middleware/errorHandler.test.js` → `errorHandler.test.ts`.
+
+- [ ] **T31 — Convert artists route to TS**  
+  Rename `server/routes/artists.js` → `artists.ts`. Add types to `req.body`, `req.params`, response types.  
+  Rename `server/routes/artists.test.js` → `artists.test.ts`. Add `supertest` types.
+
+- [ ] **T32 — Convert albums route to TS**  
+  Rename `server/routes/albums.js` → `albums.ts`. Same treatment as artists.  
+  Rename `server/routes/albums.test.js` → `albums.test.ts`.
+
+- [ ] **T33 — Convert songs route to TS**  
+  Rename `server/routes/songs.js` → `songs.ts`.  
+  Rename `server/routes/songs.test.js` → `songs.test.ts`.
+
+- [ ] **T34 — Convert playlists route to TS**  
+  Rename `server/routes/playlists.js` → `playlists.ts`.  
+  Rename `server/routes/playlists.test.js` → `playlists.test.ts`.
+
+- [ ] **T35 — Convert playlistSongs + stats routes to TS**  
+  Rename `server/routes/playlistSongs.js` → `playlistSongs.ts`.  
+  Rename `server/routes/playlistSongs.test.js` → `playlistSongs.test.ts`.  
+  Rename `server/routes/stats.js` → `stats.ts`.  
+  Rename `server/routes/stats.test.js` → `stats.test.ts`.
+
+- [ ] **T36 — Convert server entry point to TS**  
+  Rename `server/index.js` → `index.ts`. Type the Express app. Update `import.meta.url` polyfill if needed. Update `package.json` dev script to use `tsx` or `ts-node/esm`.
+
+- [ ] **T37 — Convert remaining server test files to TS**  
+  Rename `server/db/index.test.js` → `index.test.ts`. Verify all tests compile.
+
+## Phase 10: TypeScript — Client Source
+
+- [ ] **T38 — Convert API client to TS**  
+  Rename `client/src/api/client.js` → `client.ts`. Type all function params and return types using the shared entity types.  
+  Rename `client/src/api/client.test.js` → `client.test.ts`.
+
+- [ ] **T39 — Convert shared components to TS**  
+  Rename `client/src/components/Layout.jsx` → `Layout.tsx`. Type the `children` prop.  
+  Rename `client/src/components/NavBar.jsx` → `NavBar.tsx`.  
+  Rename `client/src/components/Layout.test.jsx` → `Layout.test.tsx`.  
+  Rename `client/src/components/NavBar.test.jsx` → `NavBar.test.tsx`.
+
+- [ ] **T40 — Convert Dashboard & Artists pages to TS**  
+  Rename `client/src/pages/Dashboard.jsx` → `Dashboard.tsx`.  
+  Rename `client/src/pages/ArtistsList.jsx` → `ArtistsList.tsx`.  
+  Rename `client/src/pages/ArtistDetail.jsx` → `ArtistDetail.tsx`.  
+  Rename their `.test.jsx` → `.test.tsx` counterparts.
+
+- [ ] **T41 — Convert Albums & Songs pages to TS**  
+  Rename `client/src/pages/AlbumsList.jsx` → `AlbumsList.tsx`.  
+  Rename `client/src/pages/AlbumDetail.jsx` → `AlbumDetail.tsx`.  
+  Rename `client/src/pages/SongsList.jsx` → `SongsList.tsx`.  
+  Rename their `.test.jsx` → `.test.tsx` counterparts.
+
+- [ ] **T42 — Convert Playlists pages to TS**  
+  Rename `client/src/pages/PlaylistsList.jsx` → `PlaylistsList.tsx`.  
+  Rename `client/src/pages/PlaylistDetail.jsx` → `PlaylistDetail.tsx`.  
+  Rename their `.test.jsx` → `.test.tsx` counterparts.
+
+- [ ] **T43 — Convert App shell & entry point to TS**  
+  Rename `client/src/App.jsx` → `App.tsx`.  
+  Rename `client/src/main.jsx` → `main.tsx`.  
+  Update `index.html` script src to `main.tsx` (Vite handles this).  
+  Update `client/vite.config.js` → `vite.config.ts` (or keep `.js` — Vite supports both).
+
+## Phase 11: TypeScript — Config & Build Integration
+
+- [ ] **T44 — Update vitest configs for TS**  
+  Update `server/vitest.config.js` include patterns to `['**/*.test.ts']`.  
+  Update `client/vitest.config.js` include patterns to `['**/*.test.ts', '**/*.test.tsx']`.  
+  Ensure vitest picks up tsconfig.
+
+- [ ] **T45 — Update eslint config for TS**  
+  Add `typescript-eslint` parser and plugin to `eslint.config.js`. Update file globs to include `**/*.ts`, `**/*.tsx`. Add ignores for `dist/`. Remove JSX-specific rules that don't apply to TS.
+
+- [ ] **T46 — Update npm scripts and verify build**  
+  Update `package.json` typecheck script to `tsc --noEmit` (run separately for server and client, or use project references).  
+  Update `npm run build` if server needs compilation.  
+  Run `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build` — all pass.
+
+## Phase 12: TypeScript — Verification & Polish
+
+- [ ] **T47 — Full typecheck pass**  
+  Run `tsc --noEmit` in both workspaces. Fix any remaining type errors: implicit `any`, missing null checks, untyped callback params, `useParams()` return type, etc.
+
+- [ ] **T48 — Full test pass**  
+  Run `npm run test` — all server and client tests pass on `.ts`/`.tsx` files.
+
+- [ ] **T49 — Full build and smoke test**  
+  Run `npm run build`, then `npm run dev` and manually verify the app works end-to-end (same as T16).
+
+## File Rename Index
+
+Use this reference to track all file renames:
+
+**Server JS → TS (13 files):**
+- `server/db/sqlite.js` → `sqlite.ts`
+- `server/db/index.js` → `index.ts`
+- `server/db/index.test.js` → `index.test.ts`
+- `server/middleware/errorHandler.js` → `errorHandler.ts`
+- `server/middleware/errorHandler.test.js` → `errorHandler.test.ts`
+- `server/routes/artists.js` → `artists.ts`
+- `server/routes/artists.test.js` → `artists.test.ts`
+- `server/routes/albums.js` → `albums.ts`
+- `server/routes/albums.test.js` → `albums.test.ts`
+- `server/routes/songs.js` → `songs.ts`
+- `server/routes/songs.test.js` → `songs.test.ts`
+- `server/routes/playlists.js` → `playlists.ts`
+- `server/routes/playlists.test.js` → `playlists.test.ts`
+- `server/routes/playlistSongs.js` → `playlistSongs.ts`
+- `server/routes/playlistSongs.test.js` → `playlistSongs.test.ts`
+- `server/routes/stats.js` → `stats.ts`
+- `server/routes/stats.test.js` → `stats.test.ts`
+- `server/index.js` → `index.ts`
+
+**Client JS/JSX → TS/TSX (20 files):**
+- `client/src/api/client.js` → `client.ts`
+- `client/src/api/client.test.js` → `client.test.ts`
+- `client/src/components/Layout.jsx` → `Layout.tsx`
+- `client/src/components/Layout.test.jsx` → `Layout.test.tsx`
+- `client/src/components/NavBar.jsx` → `NavBar.tsx`
+- `client/src/components/NavBar.test.jsx` → `NavBar.test.tsx`
+- `client/src/pages/Dashboard.jsx` → `Dashboard.tsx`
+- `client/src/pages/Dashboard.test.jsx` → `Dashboard.test.tsx`
+- `client/src/pages/ArtistsList.jsx` → `ArtistsList.tsx`
+- `client/src/pages/ArtistsList.test.jsx` → `ArtistsList.test.tsx`
+- `client/src/pages/ArtistDetail.jsx` → `ArtistDetail.tsx`
+- `client/src/pages/ArtistDetail.test.jsx` → `ArtistDetail.test.tsx`
+- `client/src/pages/AlbumsList.jsx` → `AlbumsList.tsx`
+- `client/src/pages/AlbumDetail.jsx` → `AlbumDetail.tsx`
+- `client/src/pages/AlbumDetail.test.jsx` → `AlbumDetail.test.tsx`
+- `client/src/pages/SongsList.jsx` → `SongsList.tsx`
+- `client/src/pages/SongsList.test.jsx` → `SongsList.test.tsx`
+- `client/src/pages/PlaylistsList.jsx` → `PlaylistsList.tsx`
+- `client/src/pages/PlaylistsList.test.jsx` → `PlaylistsList.test.tsx`
+- `client/src/pages/PlaylistDetail.jsx` → `PlaylistDetail.tsx`
+- `client/src/pages/PlaylistDetail.test.jsx` → `PlaylistDetail.test.tsx`
+- `client/src/App.jsx` → `App.tsx`
+- `client/src/main.jsx` → `main.tsx`
