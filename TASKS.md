@@ -196,7 +196,7 @@
   Update `client/vitest.config.js` include patterns to `['**/*.test.ts', '**/*.test.tsx']`.  
   Ensure vitest picks up tsconfig.
 
-- [ ] **T45 — Update eslint config for TS**  
+- [x] **T45 — Update eslint config for TS**  
   Add `typescript-eslint` parser and plugin to `eslint.config.js`. Update file globs to include `**/*.ts`, `**/*.tsx`. Add ignores for `dist/`. Remove JSX-specific rules that don't apply to TS.
 
 - [ ] **T46 — Update npm scripts and verify build**  

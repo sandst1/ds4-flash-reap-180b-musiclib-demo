@@ -2,7 +2,6 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import express from 'express';
 import supertest from 'supertest';
 import { errorHandler } from '../middleware/errorHandler.ts';
-import type { Artist } from '../types.ts';
 
 const ORIGINAL_DB_PATH = process.env.DB_PATH;
 process.env.DB_PATH = ':memory:';
