@@ -106,7 +106,7 @@
   `client/tsconfig.json` — extends base, `jsx: react-jsx`, includes `src/**.ts`, `src/**.tsx`.  
   Update `eslint.config.js` to handle `.ts`/`.tsx` files using the typescript-eslint plugin.
 
-- [ ] **T28 — Create shared type definitions**  
+- [x] **T28 — Create shared type definitions**  
   Create `types/index.d.ts` (or `types.ts`) with interfaces for all entities:
   - `Artist`, `Album`, `Song`, `Playlist`, `PlaylistSong` (full row types)
   - `ArtistInput`, `AlbumInput`, `SongInput`, `PlaylistInput` (create/update payloads)
