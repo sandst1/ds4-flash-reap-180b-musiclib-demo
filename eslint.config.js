@@ -2,6 +2,7 @@ import globals from "globals";
 import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
+import tse from "typescript-eslint";
 
 export default [
   { ignores: ["**/*.sql", "**/dist/**", "node_modules/**", "*.db"] },
@@ -9,6 +10,7 @@ export default [
   { settings: { react: { version: "detect" } } },
 
   pluginJs.configs.recommended,
+  ...tse.configs.recommended,
   pluginReact.configs.flat.recommended,
   pluginReact.configs.flat["jsx-runtime"],
 
@@ -23,7 +25,7 @@ export default [
   },
 
   {
-    files: ["server/**/*.js"],
+    files: ["server/**/*.js", "server/**/*.ts"],
     languageOptions: {
       globals: { ...globals.node },
     },
@@ -33,7 +35,7 @@ export default [
   },
 
   {
-    files: ["client/**/*.jsx", "client/**/*.js"],
+    files: ["client/**/*.jsx", "client/**/*.js", "client/**/*.tsx", "client/**/*.ts"],
     languageOptions: {
       globals: { ...globals.browser },
     },
@@ -43,7 +45,7 @@ export default [
   },
 
   {
-    files: ["client/**/*.test.jsx", "client/**/*.test.js"],
+    files: ["client/**/*.test.jsx", "client/**/*.test.js", "client/**/*.test.tsx", "client/**/*.test.ts"],
     languageOptions: {
       globals: { vi: "readonly", global: "readonly" },
     },

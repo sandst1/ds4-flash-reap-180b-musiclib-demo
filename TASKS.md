@@ -100,7 +100,7 @@
 - [x] **T26 — Install TypeScript dependencies**  
   Install `typescript` in root and both workspaces. Install `@types/node`, `@types/express` in server workspace. Add `@types/react`, `@types/react-dom` (already bundled by vite but add for `tsc`), `@types/react-router-dom` to client workspace. Install `tsx` (or `ts-node`) for running TS directly in dev.
 
-- [ ] **T27 — Create tsconfig files**  
+- [x] **T27 — Create tsconfig files**  
   Root `tsconfig.base.json` with shared compiler options (`strict: true`, `moduleResolution: bundler`, `esModuleInterop: true`, `skipLibCheck: true`).  
   `server/tsconfig.json` — extends base, `outDir: dist`, includes `src/**.ts`.  
   `client/tsconfig.json` — extends base, `jsx: react-jsx`, includes `src/**.ts`, `src/**.tsx`.  
