@@ -6,8 +6,8 @@ import { ArtistDetail } from './pages/ArtistDetail.tsx';
 import { AlbumDetail } from './pages/AlbumDetail.tsx';
 import { AlbumsList } from './pages/AlbumsList.tsx';
 import { SongsList } from './pages/SongsList.tsx';
-import { PlaylistsList } from './pages/PlaylistsList.jsx';
-import { PlaylistDetail } from './pages/PlaylistDetail.jsx';
+import { PlaylistsList } from './pages/PlaylistsList.tsx';
+import { PlaylistDetail } from './pages/PlaylistDetail.tsx';
 
 function App() {
   return (

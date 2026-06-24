@@ -10,7 +10,7 @@ vi.mock('../api/client.js', () => ({
 }));
 
 import { getPlaylists } from '../api/client';
-import { PlaylistsList } from './PlaylistsList.jsx';
+import { PlaylistsList } from './PlaylistsList.tsx';
 
 function renderIt() {
   return render(

@@ -178,7 +178,7 @@
   Rename `client/src/pages/SongsList.jsx` → `SongsList.tsx`.  
   Rename their `.test.jsx` → `.test.tsx` counterparts.
 
-- [ ] **T42 — Convert Playlists pages to TS**  
+- [x] **T42 — Convert Playlists pages to TS**  
   Rename `client/src/pages/PlaylistsList.jsx` → `PlaylistsList.tsx`.  
   Rename `client/src/pages/PlaylistDetail.jsx` → `PlaylistDetail.tsx`.  
   Rename their `.test.jsx` → `.test.tsx` counterparts.
